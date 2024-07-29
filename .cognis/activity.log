@@ -1,3 +1,4 @@
 2024-06-07T08:24:24  style(config): assert exit codes in tests
 2024-07-06T15:41:31  docs(core): dedupe overlapping findings
 2024-07-17T10:58:38  chore: BLACKBOOK redaction pass
+2024-07-29T17:15:45  style(tests): add type hints to the public API
