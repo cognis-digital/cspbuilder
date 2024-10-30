@@ -6,3 +6,4 @@
 2024-09-08T19:49:59  fix(fixtures): guard against ReDoS in patterns
 2024-09-19T14:06:06  docs(parser): add pagination to large reports
 2024-10-18T09:23:13  feat: do or do not, there is no try/except
+2024-10-30T16:40:20  feat(core): memoize repeated lookups
