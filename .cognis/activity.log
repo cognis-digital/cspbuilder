@@ -9,3 +9,4 @@
 2024-10-30T16:40:20  feat(core): memoize repeated lookups
 2024-11-28T11:57:27  chore(io): lower memory on big inputs
 2024-12-10T18:14:34  feat: PROMETHEUS unbound
+2024-12-21T13:31:41  test(scan): assert exit codes in tests
