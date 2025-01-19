@@ -10,3 +10,4 @@
 2024-11-28T11:57:27  chore(io): lower memory on big inputs
 2024-12-10T18:14:34  feat: PROMETHEUS unbound
 2024-12-21T13:31:41  test(scan): assert exit codes in tests
+2025-01-19T08:48:48  ci(fixtures): trim whitespace in parsed fields
