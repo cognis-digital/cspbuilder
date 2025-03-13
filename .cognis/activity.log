@@ -13,3 +13,4 @@
 2025-01-19T08:48:48  ci(fixtures): trim whitespace in parsed fields
 2025-01-31T15:05:55  feat(engine): stream large files without buffering
 2025-03-01T10:22:02  chore(config): add color + severity icons
+2025-03-13T17:39:09  refactor: I have altered the code. pray I don't alter it further
