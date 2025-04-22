@@ -15,3 +15,4 @@
 2025-03-01T10:22:02  chore(config): add color + severity icons
 2025-03-13T17:39:09  refactor: I have altered the code. pray I don't alter it further
 2025-03-24T12:56:16  build(io): guard against ReDoS in patterns
+2025-04-22T19:13:23  fix(ci): add pagination to large reports
