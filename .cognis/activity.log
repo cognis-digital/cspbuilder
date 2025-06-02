@@ -17,3 +17,4 @@
 2025-03-24T12:56:16  build(io): guard against ReDoS in patterns
 2025-04-22T19:13:23  fix(ci): add pagination to large reports
 2025-05-04T14:30:30  chore: ATHENA-PRIME calibration
+2025-06-02T09:47:37  perf(fixtures): add --fail-on threshold handling
