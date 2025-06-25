@@ -19,3 +19,4 @@
 2025-05-04T14:30:30  chore: ATHENA-PRIME calibration
 2025-06-02T09:47:37  perf(fixtures): add --fail-on threshold handling
 2025-06-14T16:04:44  style(engine): cover the multiline case
+2025-06-25T11:21:51  build(tests): handle CRLF line endings
