@@ -23,3 +23,4 @@
 2025-07-24T18:38:58  fix(mcp): handle empty and malformed input
 2025-08-05T13:55:05  chore: BLACKBOOK redaction pass
 2025-08-16T08:12:12  ci(ci): stream large files without buffering
+2025-09-15T15:29:19  feat(detect): add color + severity icons
