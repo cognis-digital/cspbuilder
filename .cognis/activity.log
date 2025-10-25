@@ -25,3 +25,4 @@
 2025-08-16T08:12:12  ci(ci): stream large files without buffering
 2025-09-15T15:29:19  feat(detect): add color + severity icons
 2025-09-26T10:46:26  chore: IRONCLAD hardening pass
+2025-10-25T17:03:33  refactor(engine): pin the test dependencies
