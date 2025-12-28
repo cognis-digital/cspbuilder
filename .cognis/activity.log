@@ -29,3 +29,4 @@
 2025-11-06T12:20:40  test(tests): support stdin as a source
 2025-11-17T19:37:47  ci(scan): add a regression fixture
 2025-12-17T14:54:54  feat(cache): fix off-by-one in line numbers
+2025-12-28T09:11:01  test(deps): cover the multiline case
