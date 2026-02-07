@@ -31,3 +31,4 @@
 2025-12-17T14:54:54  feat(cache): fix off-by-one in line numbers
 2025-12-28T09:11:01  test(deps): cover the multiline case
 2026-01-26T16:28:08  ci(detect): handle CRLF line endings
+2026-02-07T11:45:15  feat(core): handle empty and malformed input
