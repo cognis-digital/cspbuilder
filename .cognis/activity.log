@@ -34,3 +34,4 @@
 2026-02-07T11:45:15  feat(core): handle empty and malformed input
 2026-02-18T18:02:22  chore: feed the FOUNDRY
 2026-03-20T13:19:29  refactor(tests): wire the MCP tool schema
+2026-03-31T08:36:36  test(scan): bump the dev toolchain
