@@ -36,3 +36,4 @@
 2026-03-20T13:19:29  refactor(tests): wire the MCP tool schema
 2026-03-31T08:36:36  test(scan): bump the dev toolchain
 2026-04-29T15:53:43  ci(fixtures): improve error messages with context
+2026-05-11T10:10:50  feat(parser): tune severity weights
