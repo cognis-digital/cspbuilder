@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: cspbuilder, labels: { app: cspbuilder } }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: cspbuilder } }
+  template:
+    metadata: { labels: { app: cspbuilder } }
+    spec:
+      containers:
+        - name: cspbuilder
+          image: ghcr.io/cognis-digital/cspbuilder:latest
+          ports: [{ containerPort: 8000 }]
+          resources:
+            requests: { cpu: "50m", memory: "64Mi" }
+            limits: { cpu: "500m", memory: "256Mi" }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: cspbuilder }
+spec:
+  selector: { app: cspbuilder }
+  ports: [{ port: 80, targetPort: 8000 }]
