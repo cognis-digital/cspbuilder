@@ -1,0 +1,10 @@
+{
+  "name": "@cognis/cspbuilder",
+  "version": "0.2.0",
+  "description": "JavaScript port of cspbuilder (Cognis Neural Suite)",
+  "bin": {
+    "cspbuilder": "index.js"
+  },
+  "license": "LicenseRef-COCL-1.0",
+  "type": "module"
+}
