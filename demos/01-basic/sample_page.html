@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Acme Dashboard</title>
+
+  <!-- first-party + CDN stylesheets -->
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter">
+
+  <!-- preconnect hint feeds connect-src -->
+  <link rel="preconnect" href="https://api.acme.com">
+
+  <!-- favicon feeds img-src -->
+  <link rel="icon" href="/favicon.ico">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .hero { background: url('https://cdn.acme.com/img/hero.png'); }
+    @font-face {
+      font-family: 'AcmeIcons';
+      src: url('https://cdn.acme.com/fonts/acme-icons.woff2') format('woff2');
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1>Acme Dashboard</h1>
+    <!-- inline event handler: CSP will flag/block this -->
+    <button onclick="refresh()">Refresh</button>
+  </header>
+
+  <img src="/img/logo.png" alt="logo">
+  <img src="https://images.acme-cdn.net/banner.jpg" alt="banner">
+
+  <!-- embedded third-party widget -->
+  <iframe src="https://widgets.acme.com/status"></iframe>
+
+  <!-- third-party analytics + first-party app bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="/js/app.js"></script>
+
+  <!-- inline script with a network call: feeds connect-src, trips eval hint -->
+  <script>
+    function refresh() {
+      fetch("https://api.acme.com/v1/metrics")
+        .then(function (r) { return r.json(); })
+        .then(function (d) { window.__data = d; });
+    }
+    var ws = new WebSocket("wss://stream.acme.com/live");
+    setTimeout("refresh()", 5000);
+  </script>
+</body>
+</html>
