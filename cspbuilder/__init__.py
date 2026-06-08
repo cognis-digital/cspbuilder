@@ -1,31 +1,11 @@
-"""CSPBUILDER — generate and audit a Content-Security-Policy from page resources.
-
-Defensive / authorized-testing tool. Analysis, generation, and detection only.
-No unauthorized attack capability.
-"""
-from .core import (
-    Finding,
-    Severity,
-    extract_resources,
-    build_policy,
-    audit_policy,
-    parse_policy,
-    policy_to_header,
-    GENERATABLE_DIRECTIVES,
-)
-
-TOOL_NAME = "cspbuilder"
-TOOL_VERSION = "1.0.0"
-
-__all__ = [
-    "TOOL_NAME",
-    "TOOL_VERSION",
-    "Finding",
-    "Severity",
-    "extract_resources",
-    "build_policy",
-    "audit_policy",
-    "parse_policy",
-    "policy_to_header",
-    "GENERATABLE_DIRECTIVES",
-]
+"""cspbuilder — part of the Cognis Neural Suite."""
+try:  # re-export the tool's public API + identity from core
+    from cspbuilder.core import *  # noqa: F401,F403
+except Exception:  # pragma: no cover
+    pass
+try:
+    from cspbuilder.core import TOOL_NAME, TOOL_VERSION
+except Exception:  # pragma: no cover
+    TOOL_NAME = "cspbuilder"
+    TOOL_VERSION = "0.1.0"
+__version__ = TOOL_VERSION
