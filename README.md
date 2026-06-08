@@ -36,9 +36,11 @@ ship a real CSP
 <a name="features"></a>
 ## Features
 
-- ✅ Todo
-- ✅ Fixme
-- ✅ Xxx
+- ✅ Extract Resources
+- ✅ Build Policy
+- ✅ Policy To Header
+- ✅ Parse Policy
+- ✅ Audit Policy
 - ✅ Runs on Linux/macOS/Windows · Docker · devcontainer
 - ✅ Ports in Python, JavaScript, Go, and Rust (`ports/`)
 
