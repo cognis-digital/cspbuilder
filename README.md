@@ -16,7 +16,7 @@
 </div>
 
 ```bash
-pip install cognis-cspbuilder
+pip install "git+https://github.com/cognis-digital/cspbuilder.git"
 cspbuilder scan .            # → prioritized findings in seconds
 ```
 
@@ -50,7 +50,7 @@ ship a real CSP
 ## Quick start
 
 ```bash
-pip install cognis-cspbuilder
+pip install "git+https://github.com/cognis-digital/cspbuilder.git"
 cspbuilder --version
 cspbuilder scan .                       # scan current project
 cspbuilder scan . --format json         # machine-readable
