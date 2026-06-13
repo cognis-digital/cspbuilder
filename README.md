@@ -20,6 +20,40 @@ pip install cognis-cspbuilder
 cspbuilder scan .            # → prioritized findings in seconds
 ```
 
+## Usage — step by step
+
+1. Install the CLI (Python 3.9+):
+
+   ```bash
+   pip install cspbuilder     # or: pip install .   from a checkout
+   ```
+
+2. Build a least-privilege policy — the `build` subcommand scans an HTML page and emits a Content-Security-Policy header:
+
+   ```bash
+   cspbuilder build page.html --url https://app.example.com
+   ```
+
+3. Audit an existing policy for weaknesses — pass a file or an inline header string:
+
+   ```bash
+   cspbuilder audit policy.txt
+   cspbuilder audit --policy "default-src 'self'; script-src 'unsafe-inline'"
+   ```
+
+4. Read the result via exit code: `0` = clean / no actionable findings, `1` = HIGH/MEDIUM weaknesses (or a policy still permitting inline), `2` = usage error. Use `--format json` to capture the generated header:
+
+   ```bash
+   cspbuilder build page.html --url https://app.example.com --format json | jq -r .header
+   ```
+
+5. Gate CI on CSP hygiene — fail the build when a policy regresses:
+
+   ```bash
+   cspbuilder audit policy.txt || echo "CSP weaknesses detected"
+   ```
+
+
 ## Contents
 
 - [Why cspbuilder?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
