@@ -50,9 +50,13 @@ def _cmd_build(args) -> int:
         print(f"error: cannot read {args.page}: {exc}", file=sys.stderr)
         return 2
 
-    scan = extract_resources(html, args.url)
-    policy = build_policy(scan, allow_inline=args.allow_inline)
-    header = policy_to_header(policy)
+    try:
+        scan = extract_resources(html, args.url)
+        policy = build_policy(scan, allow_inline=args.allow_inline)
+        header = policy_to_header(policy)
+    except Exception as exc:  # pragma: no cover
+        print(f"error: failed to process {args.page}: {exc}", file=sys.stderr)
+        return 2
 
     warnings = []
     if args.allow_inline and (scan.has_inline_script or scan.has_inline_style
@@ -115,8 +119,12 @@ def _cmd_audit(args) -> int:
         print("error: empty policy", file=sys.stderr)
         return 2
 
-    policy = parse_policy(header)
-    findings = audit_policy(policy)
+    try:
+        policy = parse_policy(header)
+        findings = audit_policy(policy)
+    except Exception as exc:
+        print(f"error: failed to parse/audit policy: {exc}", file=sys.stderr)
+        return 2
     counts = {Severity.HIGH: 0, Severity.MEDIUM: 0, Severity.LOW: 0, Severity.INFO: 0}
     for f in findings:
         counts[f.severity] = counts.get(f.severity, 0) + 1
@@ -176,8 +184,15 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv=None) -> int:
     parser = build_parser()
-    args = parser.parse_args(argv)
-    return args.func(args)
+    try:
+        args = parser.parse_args(argv)
+    except SystemExit as exc:
+        return int(exc.code) if exc.code is not None else 2
+    try:
+        return args.func(args)
+    except Exception as exc:  # pragma: no cover
+        print(f"error: unexpected failure: {exc}", file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":

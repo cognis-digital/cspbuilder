@@ -271,17 +271,33 @@ class _ResourceParser(HTMLParser):
 
 
 def extract_resources(html: str, page_url: str = "") -> ScanResult:
-    """Scan HTML and return a ScanResult describing referenced origins."""
+    """Scan HTML and return a ScanResult describing referenced origins.
+
+    Accepts an empty string (returns an empty ScanResult). Raises ValueError
+    on non-string input.
+    """
+    if not isinstance(html, str):
+        raise ValueError(
+            f"extract_resources: html must be a str, got {type(html).__name__}"
+        )
+    page_url = page_url or ""
     origin = ""
     if page_url:
-        p = urlparse(page_url)
-        if p.scheme and p.hostname:
-            netloc = p.hostname + (f":{p.port}" if p.port else "")
-            origin = f"{p.scheme}://{netloc}"
-    parser = _ResourceParser(origin)
-    parser.feed(html or "")
-    parser.close()
-    return parser.result
+        try:
+            p = urlparse(page_url)
+            if p.scheme and p.hostname:
+                netloc = p.hostname + (f":{p.port}" if p.port else "")
+                origin = f"{p.scheme}://{netloc}"
+        except Exception:
+            # Malformed page_url — treat as no origin (safe fallback)
+            origin = ""
+    resource_parser = _ResourceParser(origin)
+    try:
+        resource_parser.feed(html)
+        resource_parser.close()
+    except Exception as exc:
+        raise ValueError(f"extract_resources: HTML parsing failed: {exc}") from exc
+    return resource_parser.result
 
 
 # --------------------------------------------------------------------------- #
@@ -293,7 +309,13 @@ def build_policy(scan: ScanResult, allow_inline: bool = False) -> dict:
     Secure-by-default: default-src 'self', object-src 'none', base-uri 'self',
     frame-ancestors 'self', plus exactly the origins observed. Inline content is
     NOT permitted unless allow_inline=True (and even then a warning is attached).
+
+    Raises TypeError if *scan* is not a ScanResult.
     """
+    if not isinstance(scan, ScanResult):
+        raise TypeError(
+            f"build_policy: expected ScanResult, got {type(scan).__name__}"
+        )
     policy: dict = {}
 
     # Baseline hardening directives.
@@ -353,7 +375,17 @@ def policy_to_header(policy: dict) -> str:
 
 
 def parse_policy(header: str) -> dict:
-    """Parse a CSP header string into an ordered {directive: [sources]} dict."""
+    """Parse a CSP header string into an ordered {directive: [sources]} dict.
+
+    Raises TypeError on non-string input and ValueError on an empty/whitespace
+    string.
+    """
+    if not isinstance(header, str):
+        raise TypeError(
+            f"parse_policy: header must be a str, got {type(header).__name__}"
+        )
+    if not header.strip():
+        raise ValueError("parse_policy: header must not be empty")
     policy: dict = {}
     for chunk in header.split(";"):
         chunk = chunk.strip()
@@ -391,7 +423,16 @@ def _is_wildcard(src: str) -> bool:
 
 
 def audit_policy(policy: dict) -> list:
-    """Return a list[Finding] describing weaknesses in a parsed CSP."""
+    """Return a list[Finding] describing weaknesses in a parsed CSP.
+
+    Raises TypeError on non-dict input and ValueError on an empty dict.
+    """
+    if not isinstance(policy, dict):
+        raise TypeError(
+            f"audit_policy: policy must be a dict, got {type(policy).__name__}"
+        )
+    if not policy:
+        raise ValueError("audit_policy: policy dict must not be empty")
     findings: list = []
     F = findings.append
 
