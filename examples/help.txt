@@ -1,0 +1,16 @@
+$ cspbuilder-emit --help
+
+usage: cspbuilder [-h] [--version] [--format {table,json}] {build,audit} ...
+
+Generate and audit a Content-Security-Policy from page resources.
+
+positional arguments:
+  {build,audit}
+    build               scan an HTML page and emit a least-privilege CSP
+    audit               audit an existing CSP for weaknesses
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --format {table,json}
+                        output format (default: table)

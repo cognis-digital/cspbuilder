@@ -20,6 +20,56 @@ pip install cognis-cspbuilder
 cspbuilder scan .            # → prioritized findings in seconds
 ```
 
+
+<!-- cognis:example:start -->
+## 🔎 Example output
+
+Real, reproducible output from the tool — runs offline:
+
+```console
+$ cspbuilder-emit --version
+cspbuilder 0.1.0
+```
+
+```console
+$ cspbuilder-emit --help
+usage: cspbuilder [-h] [--version] [--format {table,json}] {build,audit} ...
+
+Generate and audit a Content-Security-Policy from page resources.
+
+positional arguments:
+  {build,audit}
+    build               scan an HTML page and emit a least-privilege CSP
+    audit               audit an existing CSP for weaknesses
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --format {table,json}
+                        output format (default: table)
+```
+
+> Blocks above are real `cspbuilder` output — reproduce them from a clone.
+
+**Sample result format** _(illustrative values — run on your own data for real findings):_
+
+```
+{
+"findings": [
+    {
+        "id": "1234567890",
+        "title": "Suspicious Network Activity",
+        "description": "Possible malicious activity detected on network segment 192.168.1.0/24",
+        "created_by": "cspbuilder",
+        "created_at": "2023-02-20T14:30:00Z",
+        "updated_at": "2023-02-20T14:30:00Z"
+    }
+]
+}
+```
+
+<!-- cognis:example:end -->
+
 ## Usage — step by step
 
 1. Install the CLI (Python 3.9+):
